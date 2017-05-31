@@ -44,4 +44,15 @@
         android:layout_marginBottom="79dp"
         android:id="@+id/bt_Salvar"
         android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:id="@+id/tv_cadastrar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp"
+        android:text="Adicionar contato"
+        android:textColor="@color/colorAccent"
+        android:textSize="20sp" />
 </RelativeLayout>

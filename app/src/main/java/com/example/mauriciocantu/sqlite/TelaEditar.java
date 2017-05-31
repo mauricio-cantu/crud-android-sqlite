@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import dao.ContatoDAO;
@@ -21,6 +22,7 @@ public class TelaEditar extends Activity{
     private Button btEditar;
     private ContatoDAO contatoDAO;
     private Contato contato;
+    private TextView tvEditar;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -59,6 +61,7 @@ public class TelaEditar extends Activity{
         this.etEmail = (EditText) findViewById(R.id.et_email_editar);
         this.etTelefone = (EditText) findViewById(R.id.et_telefone_editar);
         this.btEditar = (Button) findViewById(R.id.bt_editar);
+        this.tvEditar = (TextView) findViewById(R.id.tv_editar);
         this.contatoDAO = new ContatoDAO(this);
         contato = (Contato) getIntent().getExtras().getSerializable("contato");
     }

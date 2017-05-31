@@ -13,6 +13,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="27dp"
         android:text="CRUD SQLite"
+        android:textColor="@color/colorAccent"
         android:textSize="20sp" />
 
     <Button

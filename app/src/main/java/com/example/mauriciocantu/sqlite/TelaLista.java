@@ -26,12 +26,12 @@ import pojo.Contato;
 public class TelaLista extends ListActivity {
 
     private ContatoDAO contatoDAO;
+    private Contato contatoSelecionado;
     private ArrayAdapter<Contato> adapterContatos;
     private ArrayList<Contato> listaContatos;
     private Dialog dialogDeletarContato;
     private AlertDialog.Builder builder;
     private int posicao;
-    private Contato contatoSelecionado;
 
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +42,7 @@ public class TelaLista extends ListActivity {
         //Seta a lista que será exibida na ListActivity
         setListAdapter(adapterContatos);
 
-        //Define que a lista dessa activity implementará menus de contexto em seus itens
+        //Permite que a lista dessa activity trabalhe com menus de contexto em seus itens
         registerForContextMenu(getListView());
     }
 
@@ -61,16 +61,10 @@ public class TelaLista extends ListActivity {
         this.onCreate(null);
     }
 
-    //Método para criar o ContextMenu dos itens da lista (editar ou excluir)
+    //Método para criar o ContextMenu dos itens da lista (opções de editar ou excluir)
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
-
-        //AdapterView para identificar qual item da lista chamou o ContextMenu.
-        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo)menuInfo;
-
-        //Defino que a variavel posicao receberá sempre a posição do item que for selecionado
-        posicao = info.position;
 
         //Adiciono um "título" para o ContextMenu
         menu.setHeaderTitle("Escolha uma opção:");
@@ -86,11 +80,18 @@ public class TelaLista extends ListActivity {
     @Override
     public boolean onContextItemSelected(MenuItem item) {
 
-        //Instancio um objeto do tipo Contato com o item da lista que chamou o ContextMenu.
+        //Através da classe AdapterView.AdapterContextMenuInfo consigo pegar informações do item que chamou o ContextMenu
+        //Implemento essa classe no objeto itemInfo
+        AdapterView.AdapterContextMenuInfo itemInfo = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+
+        //Armazeno a posição do item que chamou o ContextMenu através do atributo position do objeto itemInfo
+        posicao = itemInfo.position;
+
+        //Instancio um objeto do tipo Contato com o item da lista que chamou o ContextMenu, passando a posição do mesmo como parâmetro.
         //O retorno será um Object, então faço um casting para Contato.
         contatoSelecionado = (Contato) getListAdapter().getItem(posicao);
 
-        //Instacio um objeto do tipo Dialog, passando como parâmetro o contato que será manipulado
+        //Instacio um objeto do tipo Dialog, passando como parâmetro o contato que será deletado
         dialogDeletarContato = createDialogDeletarContato(contatoSelecionado);
 
         //switch nas opções do ContextMenu (1: Editar | 2: Excluir)
@@ -112,7 +113,7 @@ public class TelaLista extends ListActivity {
     //Método para ciar um Dialog que confirmará se o usuário quer deletar o contato
     public Dialog createDialogDeletarContato(final Contato contatoSelecionado){
 
-        //Instancio um objeto Builder, responsável por adicionar elementos aos Dialogs
+        //Instancio um objeto Builder, responsável por criar Dialogs e adicionar elementos aos mesmos
         builder = new AlertDialog.Builder(TelaLista.this);
 
         //Seto uma mensagem ao Dialog

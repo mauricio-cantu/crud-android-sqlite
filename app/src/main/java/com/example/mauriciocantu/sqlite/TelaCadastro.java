@@ -5,7 +5,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 import dao.ContatoDAO;
 import pojo.Contato;
@@ -19,6 +22,7 @@ public class TelaCadastro extends Activity {
     private EditText etNome, etEmail, etTelefone;
     private Button btSalvar;
     private Contato contato;
+    private TextView tvCadastrar;
     private ContatoDAO contatoDAO;
 
     protected void onCreate (Bundle savedInstanceState){
@@ -52,6 +56,7 @@ public class TelaCadastro extends Activity {
 
     private void inicializaComponentes(){
         this.etNome = (EditText)findViewById(R.id.et_nome_editar);
+        this.tvCadastrar = (TextView) findViewById(R.id.tv_cadastrar);
         this.etEmail = (EditText)findViewById(R.id.et_email_editar);
         this.etTelefone = (EditText)findViewById(R.id.et_Telefone);
         this.btSalvar = (Button)findViewById(R.id.bt_Salvar);
