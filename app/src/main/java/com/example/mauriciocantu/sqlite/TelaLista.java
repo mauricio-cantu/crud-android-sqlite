@@ -39,7 +39,7 @@ public class TelaLista extends ListActivity {
         //Chama o método que inicializa os componentes
         inicializaComps();
 
-        //Seta a lista que será exibida na ListActivity
+        //Seta a lista que será exibida na ListActivity através de um adapter
         setListAdapter(adapterContatos);
 
         //Permite que a lista dessa activity trabalhe com menus de contexto em seus itens
