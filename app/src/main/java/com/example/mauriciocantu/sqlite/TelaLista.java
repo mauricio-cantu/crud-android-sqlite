@@ -123,15 +123,15 @@ public class TelaLista extends ListActivity {
         builder.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                contatoDAO.deletar(contatoSelecionado);
-                boolean deletou = listaContatos.remove(contatoSelecionado);
+                boolean deletou = contatoDAO.deletar(contatoSelecionado);            
                 if (deletou){
+                    listaContatos.remove(contatoSelecionado);
                     Toast.makeText(TelaLista.this, "Contato deletado", Toast.LENGTH_LONG).show();
+                    //Método para "atualizar" o ArrayAdapter, pois um item foi excluído   
+                    adapterContatos.notifyDataSetChanged();
                 }else{
                     Toast.makeText(TelaLista.this, "Deu ruim", Toast.LENGTH_LONG).show();
-                }
-                //Método para "atualizar" o ArrayAdapter, pois um item foi excluído
-                adapterContatos.notifyDataSetChanged();
+                }                             
             }
         });
 
